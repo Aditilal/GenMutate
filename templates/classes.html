@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Class</title>
+	<link rel="stylesheet" href="/static/class.css">
+</head>
+<body>
+	<nav class="navbar">
+		<span class="open-slide">
+			<a href="#" onclick="openSlideMenu()">
+				<svg width="30" height="30">
+					<path d="M0,5 30,5" stroke="#fff"
+					stroke-width="5"/>
+					<path d="M0,14 30,14" stroke="#fff"
+					stroke-width="5"/>
+					<path d="M0,23 30,23" stroke="#fff"
+					stroke-width="5"/>
+				</svg>
+			</a>
+		</span>
+
+		<ul class="navbar-nav">
+			<li><a href="index (2).html">Home</a></li>
+			<li><a href="about.html">About</a></li>
+
+			<li><a href="#">Contact</a></li>
+
+		</ul>
+	</nav>
+
+	<div id="side-menu" class="side-nav">
+		<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+		<a href="class.html">Classes</a>
+
+		  <button class="dropdown-btn">Types Of Classes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="class1.html">Class 1</a>
+    <a href="class2.html">Class 2</a>
+    <a href="class3.html">Class 3</a>
+    <a href="class4.html">Class 4</a>
+    <a href="class5.html">Class 5</a>
+    <a href="class6.html">Class 6</a>
+    <a href="class7.html">Class 7</a>
+    <a href="class8.html">Class 8</a>
+    <a href="class9.html">Class 9</a>
+  </div>
+
+		<a href="index1.html">Logout</a>
+	</div>
+			<div class="animation-area">
+    	<ul class="box-area">
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+
+    </div>
+
+	<div id="main">
+		 <div class="login">
+   <h1>About Classes</h1>
+
+
+
+   <center><img src="/static/class1.png"></center>
+
+			 <br>
+			 <br>
+   <font size="4"><p>The classes represent different levels of whether or not the variant is a driver or a passenger mutation and not the type of cancer.
+
+MSKCC has divided the classes into 9 numbers of classes where the initial classes starting from 1 has majority of suppressors (cancer preventing genes) and as we move higher, the number of drivers increases as the class number increases.</p>
+   </font>
+     <!-- Main Input For Receiving Query to our ML -->
+
+
+
+
+   <br>
+   <br>
+
+
+
+
+ </div>
+
+	</div>
+
+	<script>
+		function openSlideMenu(){
+			document.getElementById('side-menu').style.width ='250px';
+			document.getElementById('main').style.marginLeft='250px';
+		}
+		function closeSideMenu(){
+			document.getElementById('side-menu').style.width ='0';
+			document.getElementById('main').style.marginLeft='0';
+		}
+
+		var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+
+
+	</script>
+
+</body>
+</html>

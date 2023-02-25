@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Home</title>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+	<nav class="navbar">
+		<span class="open-slide">
+			<a href="#" onclick="openSlideMenu()">
+				<svg width="30" height="30">
+					<path d="M0,5 30,5" stroke="#fff"
+					stroke-width="5"/>
+					<path d="M0,14 30,14" stroke="#fff"
+					stroke-width="5"/>
+					<path d="M0,23 30,23" stroke="#fff"
+					stroke-width="5"/>
+				</svg>
+			</a>
+		</span>
+
+		<ul class="navbar-nav">
+			<li><a href="index (2).html">Home</a></li>
+			<li><a href="about.html">About</a></li>
+
+			<li><a href="#">Contact</a></li>
+
+		</ul>
+	</nav>
+
+	<div id="side-menu" class="side-nav">
+		<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+		<a href="classes.html">Classes</a>
+
+		  <button class="dropdown-btn">Types Of Classes
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="class1.html">Class 1</a>
+    <a href="#">Class 2</a>
+    <a href="#">Class 3</a>
+    <a href="#">Class 4</a>
+    <a href="#">Class 5</a>
+    <a href="#">Class 6</a>
+    <a href="#">Class 7</a>
+    <a href="#">Class 8</a>
+    <a href="#">Class 9</a>
+  </div>
+
+		<a href="index1.html">Logout</a>
+	</div>
+			<div class="animation-area">
+    	<ul class="box-area">
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+
+    </div>
+
+	<div id="main">
+		 <div class="login">
+   <h1>CLASS PREDICTION</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form method="POST" name="form">
+       <input type="text" name="u" placeholder="GENE" required="required" />
+       <br>
+
+
+        <input type="text" name="a" placeholder="VARIATION" required="required" />
+        <br>
+
+
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+
+
+   <br>
+   <br>
+
+<h1>Predicted Class: {{n}} </h1>
+
+
+ </div>
+
+	</div>
+
+	<script>
+		function openSlideMenu(){
+			document.getElementById('side-menu').style.width ='250px';
+			document.getElementById('main').style.marginLeft='250px';
+		}
+		function closeSideMenu(){
+			document.getElementById('side-menu').style.width ='0';
+			document.getElementById('main').style.marginLeft='0';
+		}
+
+		var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+
+
+	</script>
+
+</body>
+</html>
