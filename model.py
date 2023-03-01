@@ -108,9 +108,8 @@ print("Hi aditi")
 # submit.to_csv('submission.csv', index=False)
 
 
-import pickle
-file=open('filename.pkl','wb')
-pickle.dump(classifier, file) 
+import joblib 
+joblib.dump(classifier, r"C:\\Users\\Aditi Lal\\Project\\model.joblib")
 
 # Save the trained model as a pickle string.
 # saved_model = pickle.dumps(classifier)
