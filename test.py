@@ -4,7 +4,7 @@ import pandas as pd
 from joblib import dump,load
 from sklearn.preprocessing import LabelEncoder
 app = Flask(__name__)
-classifier = load('filename.pkl')
+classifier = joblib.load("model.joblib")
 
 
 
@@ -73,6 +73,7 @@ def savepost():
         n4 = n4.join(n3)
         n4.head()
         new_input = [n4]
+        new_input=n4.values
         new_output = classifier.predict(new_input)
         print(new_output)
         return render_template('/templates/index(2).html', n=new_output)
