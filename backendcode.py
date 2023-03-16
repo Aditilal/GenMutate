@@ -35,31 +35,39 @@ test_variant = pd.read_csv('test_variants.txt')
 
 print(test_variant.head())
 print(train_variant.head())
+#(ROWS,COLUMNS) - displays dimensions of the array
 print(train_variant.shape)
 print(test_variant.shape)
+#Find the count of variants that are null, n eliminate them if any row is null
 train_m = train_variant.isnull().sum()
 print(train_m)
 test_m = test_variant.isnull().sum()
 print(test_m)
 train_data = train_variant.dropna(axis = 0, how = "any")
 test_data = test_variant.dropna(axis = 0, how = "any")
+
 print(train_data)
 print(test_data)
+#Find unique values 
 train_data["Class"].unique()
 train_data["Gene"].unique()
 train_data["Gene"].value_counts()
 train_data["Variation"].unique()
 train_data["Variation"].value_counts()
 
-#sns.countplot(x = train_data["Gene"], hue = train_data["Class"])
+sns.countplot(x = train_data["Gene"], hue = train_data["Class"])
 plt.show()
+#output would be a Series object with the number of occurrences of each unique combination of gene and class in the data.
 train_data.groupby(["Gene"])["Class"].value_counts()
 train_data.groupby(["Variation"])["Class"].value_counts()
+#output would be a Series object with the number of occurrences of each unique combination of variation and class in the data.
 str_data = train_data.select_dtypes(include = ["object"])
 str_dt = test_data.select_dtypes(include = ["object"])
 int_data = train_data.select_dtypes(include = ["integer", "float"])
 int_dt = test_data.select_dtypes(include = ["integer", "float"])
-
+#By splitting the data into separate DataFrames based on data type, these variables can be used for subsequent analysis or modeling, such as performing different preprocessing steps or feature engineering for each data type.
+#Next, we convert the string data of train and text to numerical data for processing because it reduces memory and algorithm require numerical data
+#By using OneHotEncoder after LabelEncoder, we can remove the ordering among the categories and represent them as a set of binary variables. This is particularly useful for machine learning algorithms that require non-ordinal, non-parametric inputs, such as tree-based models, k-NN, and SVMs with certain kernels.
 from sklearn.preprocessing import LabelEncoder
 label = LabelEncoder()
 feature = str_data.apply(label.fit_transform)
@@ -71,7 +79,7 @@ label = LabelEncoder()
 Test = str_dt.apply(label.fit_transform)
 Test = Test.join(int_dt)
 print(Test.head())
-
+#After converting the ordinal values to numerical as a feature matrix we are further more converting to a binary matrix which is easy for machine leanring algorithms
 from sklearn.preprocessing import OneHotEncoder 
 onehotencoder = OneHotEncoder() 
 data = onehotencoder.fit_transform(feature).toarray() 
@@ -79,16 +87,19 @@ data = onehotencoder.fit_transform(feature).toarray()
 !pip install imblearn
 
 y_train = feature["Class"]
+#This is a dependent variable which is the output
 y_train.head()
+#This is the independent variable which is the input feature
 x_train = feature.drop(["Class", "ID"] ,axis = 1)
 print(x_train.head())
 from sklearn.model_selection import train_test_split
+#Spliting the data for train and test with 20% for testing and randome state=0 signifies that use the same ratio everytime
 x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.2, random_state=0)
 print(x_train.head())
 print(y_train.head())
 
 from sklearn.preprocessing import StandardScaler
-
+#Scaling so that everything becomes equally impotant, should be used only on train
 sc = StandardScaler()
 x_train = sc.fit_transform(x_train)
 x_test = sc.transform(x_test)
@@ -146,12 +157,18 @@ classifier2.fit(x_train_oversample, y_train_oversample)
 classifier3 = SVC(kernel='rbf', probability=True, random_state=10)
 classifier3.fit(x_train_undersample, y_train_undersample)
 
-classifier4 = LogisticRegression(multi_class='multinomial', solver='lbfgs')
+# classifier4 = LogisticRegression(multi_class='multinomial', solver='lbfgs')
+# classifier4.fit(x_train_oversample, y_train_oversample)
+classifier4 = LogisticRegression()
 classifier4.fit(x_train_oversample, y_train_oversample)
 
 # Evaluate the classifiers using the original test data
 y_pred1 = classifier1.predict(x_test)
 acc1 = accuracy_score(y_test, y_pred1)
+#This method computes the precision for each label separately and then takes the average of those values. 
+#It is useful when you want to know the overall precision of the model, without taking into account class imbalance.
+
+
 prec1 = precision_score(y_test, y_pred1, average='macro')
 
 y_pred2 = classifier2.predict(x_test)
